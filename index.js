@@ -17,7 +17,7 @@ const getUserCredentials = promisify(awscred.load);
  */
 const getAllProjects = async () => {
   const { ENDPOINT, INDEX, TYPE } = process.env;
-  let counter = 0;
+  let pagination = 0;
 
   try {
     // Get user's AWS credentials and region
@@ -40,7 +40,6 @@ const getAllProjects = async () => {
     };
 
     const client = elasticsearch.Client(options);
-    const file = fs.createWriteStream("./results.ndjson");
 
     const start = await client.search({
       index: INDEX,
@@ -56,10 +55,14 @@ const getAllProjects = async () => {
 
     let { hits, _scroll_id } = start;
 
+    // We'll put results continuously in order to save memory.
+    const file = fs.createWriteStream("./results.ndjson");
+
     while (hits && hits.hits.length) {
-      counter += hits.hits.length;
-      console.log(`${counter} of ${hits.total}`);
-      file.write(`${JSON.stringify(...hits.hits)}\n`);
+      pagination += hits.hits.length;
+      console.log(`${pagination} of ${hits.total}`);
+
+      hits.hits.forEach(result => file.write(`${JSON.stringify(result)}\n`));
 
       const next = await client.scroll({
         scroll_id: _scroll_id,
