@@ -17,7 +17,7 @@ const getUserCredentials = promisify(awscred.load);
  */
 const getAllProjects = async () => {
   const { ENDPOINT, INDEX, TYPE } = process.env;
-  const results = [];
+  let counter = 0;
 
   try {
     // Get user's AWS credentials and region
@@ -31,19 +31,23 @@ const getAllProjects = async () => {
       host: ENDPOINT,
       connectionClass,
       apiVersion: "6.2",
+      requestTimeout: 300000,
       awsConfig: new AWS.Config({
         accessKeyId,
         secretAccessKey,
         region
       })
     };
+
     const client = elasticsearch.Client(options);
+    const file = fs.createWriteStream("./results.ndjson");
 
     const start = await client.search({
       index: INDEX,
       type: TYPE,
-      scroll: "10s",
+      scroll: "10m",
       body: {
+        size: 3000,
         query: {
           match_all: {}
         }
@@ -53,24 +57,20 @@ const getAllProjects = async () => {
     let { hits, _scroll_id } = start;
 
     while (hits && hits.hits.length) {
-      // Append all new hits
-      results.push(...hits.hits);
-
-      console.log(`${results.length} of ${hits.total}`);
+      counter += hits.hits.length;
+      console.log(`${counter} of ${hits.total}`);
+      file.write(`${JSON.stringify(...hits.hits)}\n`);
 
       const next = await client.scroll({
         scroll_id: _scroll_id,
-        scroll: "10s"
+        scroll: "10m"
       });
 
       hits = next.hits;
       _scroll_id = next._scroll_id;
     }
 
-    return fs.writeFileSync(
-      "./results.json",
-      JSON.stringify({ data: results })
-    );
+    return file.end();
   } catch (e) {
     return console.error(e);
   }
