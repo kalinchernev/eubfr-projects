@@ -1,0 +1,19 @@
+{
+  "private": true,
+  "name": "eubfr-projects-consolidation",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "aws-sdk": "2.344.0",
+    "aws4": "1.8.0",
+    "awscred": "1.4.1",
+    "dotenv": "6.1.0",
+    "elasticsearch": "15.2.0",
+    "http-aws-es": "6.0.0"
+  },
+  "engines": {
+    "node": ">=8.0"
+  }
+}
