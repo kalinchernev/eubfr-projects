@@ -1,6 +1,12 @@
-# EUBFR Projects Consolidation
+# EUBFR Projects
 
-Repository with various strategies for detecting duplicates and similar projects.
+Get all projects from a given Elasticsearch index without hitting memory limitations.
+
+## Get dependencies
+
+```sh
+$ npm install
+```
 
 ## Run the script
 
@@ -11,5 +17,5 @@ $ node index.js
 or
 
 ```sh
-$ yarn start
+$ npm start
 ```
