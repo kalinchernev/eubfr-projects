@@ -1,21 +1,39 @@
 # EUBFR Projects
 
-Get all projects from a given Elasticsearch index without hitting memory limitations.
+Work with projects locally.
 
 ## Get dependencies
+
+```sh
+$ yarn
+```
+
+Or:
 
 ```sh
 $ npm install
 ```
 
-## Run the script
+# Environment settings
+
+Copy `.env.example` to `.env` and set the necessary values.
+
+## Scripts
+
+Pull all projects from a given index:
 
 ```sh
-$ node index.js
+$ yarn pull
 ```
 
-or
+Create the index:
 
 ```sh
-$ npm start
+$ yarn createIndex
+```
+
+Push the results from the `pull` operation to another (local) index:
+
+```sh
+$ yarn push
 ```

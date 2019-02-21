@@ -13,10 +13,10 @@ const elasticsearch = require("elasticsearch");
 const getUserCredentials = promisify(awscred.load);
 
 /**
- * Get all records/projects out of a given Elsaticsearch index.
+ * Get all records/projects out of a given Elasticsearch index.
  */
 const getAllProjects = async () => {
-  const { ENDPOINT, INDEX, TYPE } = process.env;
+  const { ES_REMOTE_ENDPOINT, INDEX, TYPE } = process.env;
   let pagination = 0;
 
   try {
@@ -28,7 +28,7 @@ const getAllProjects = async () => {
 
     // Elasticsearch client configuration
     const options = {
-      host: ENDPOINT,
+      host: ES_REMOTE_ENDPOINT,
       connectionClass,
       apiVersion: "6.2",
       requestTimeout: 300000,
