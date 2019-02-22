@@ -100,3 +100,9 @@ Push the results from the `pull` operation to another (local) index:
 ```sh
 $ yarn push
 ```
+
+## Testing premium features
+
+Keep in mind that there are certain features available only at a given [subscription level](https://www.elastic.co/subscriptions).
+
+When you want to evaluate premium features locally, you will need to [start a trial](https://www.elastic.co/guide/en/elasticsearch/reference/6.3/start-trial.html).

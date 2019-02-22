@@ -1,7 +1,7 @@
 version: "3.6"
 services:
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.3.0
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.3.2
     container_name: elasticsearch
     environment:
       - node.name=es
@@ -16,24 +16,20 @@ services:
     cap_add:
       - ALL
     privileged: true
-    deploy:
-      mode: global
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-        max_attempts: 3
-        window: 120s
     volumes:
       - esdata:/usr/share/elasticsearch/data
+      - ./config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
     ports:
       - 9200:9200
       - 9300:9300
   kibana:
-    image: docker.elastic.co/kibana/kibana-oss:6.3.0
+    image: docker.elastic.co/kibana/kibana:6.3.2
     container_name: kibana
     environment:
       SERVER_NAME: localhost
       ELASTICSEARCH_URL: http://elasticsearch:9200/
+    # volumes:
+    # - ./config/kibana.yml:/usr/share/kibana/config/kibana.yml
     ports:
       - 5601:5601
     ulimits:
@@ -43,13 +39,6 @@ services:
         hard: -1
     cap_add:
       - ALL
-    deploy:
-      mode: global
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-        max_attempts: 3
-        window: 120s
   nginx:
     image: nginx:latest
     ports:
@@ -62,3 +51,4 @@ services:
 
 volumes:
   esdata:
+    driver: local
