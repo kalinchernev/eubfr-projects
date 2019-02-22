@@ -12,27 +12,33 @@ Kibana is being served behind Nginx Proxy so you can secure access of kibana for
 
 ## Requirements
 
-- [Docker](https://www.docker.com/)
-- [Docker Compose](https://docs.docker.com/compose/)
+- [Docker](https://www.docker.com/) (18.02.0+)
+- [Docker Compose](https://docs.docker.com/compose/) (1.23.2+)
 
 ### "Up" the stack
 
 In deamon mode:
 
 ```
-docker-compose up -d
+$ docker-compose up -d
+```
+
+In normal mode, better for being able to see logs:
+
+```
+$ docker-compose up
 ```
 
 ### Check status of docker-compose cluster
 
 ```
-docker-compose ps -a
+$ docker-compose ps -a
 ```
 
 ### Cluster Node Info
 
 ```
-curl http://localhost:9200/_nodes?pretty=true
+$ curl http://localhost:9200/_nodes?pretty=true
 ```
 
 ### Access Kibana

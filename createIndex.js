@@ -14,8 +14,7 @@ const createIndex = async () => {
   const projectMapping = getProjectMapping();
 
   try {
-    const options = { host: ES_LOCAL_ENDPOINT, index };
-    const client = elasticsearch.Client(options);
+    const client = elasticsearch.Client({ host: ES_LOCAL_ENDPOINT, index });
 
     const exists = await client.indices.exists({ index });
 
