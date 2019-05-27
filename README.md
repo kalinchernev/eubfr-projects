@@ -1,19 +1,44 @@
 # EUBFR Projects
 
-Work with projects locally.
+Work with Elasticsearch projects locally.
 
 ## Elasticsearch and Kibana
 
-### Overview
+The `docker-compose.yml` file in this repository contains all you need to work with Elasticsearch and Kibana locally.
 
-There is a `docker-compose.yml` file containing all you need to work with Elasticsearch and Kibana locally.
+Kibana is being served via Nginx Proxy.
 
-Kibana is being served behind Nginx Proxy so you can secure access of kibana for your purpose.
+The repository contains a few utility scripts:
+
+- Create an index and apply mapping to local Elasticsearch instance.
+- Migrate data from a remote Amazon Elasticsearch domain to a local instance.
 
 ## Requirements
 
 - [Docker](https://www.docker.com/) (18.02.0+)
 - [Docker Compose](https://docs.docker.com/compose/) (1.23.2+)
+
+## Update versions
+
+Elasticsearch and Kibana are dynamic products and they receive frequent updates.
+
+In order to ensure your scripting is compatible with the target version of a given product, make sure you use the correct version in `docker-compose.yml`:
+
+```yml
+elasticsearch:
+  image: docker.elastic.co/elasticsearch/elasticsearch:6.5.4
+```
+
+and
+
+```yml
+kibana:
+  image: docker.elastic.co/kibana/kibana:6.5.4
+```
+
+Available Docker are listed [here](https://www.docker.elastic.co/#).
+
+## Provision resources
 
 ### "Up" the stack
 
@@ -61,47 +86,39 @@ http://localhost:9200
 
 ## Node apps
 
-### Overview
+A set of utilities to improve your local development workflows with Elasticsearch, Kibana and Node.js.
 
-There are a few scripts which help you migrate data from a remote Amazon Elasticsearch domain to a local instance in order to facilitate the local development workflows.
-
-## Get dependencies
+### Get dependencies
 
 ```sh
-$ yarn
+$ yarn install
 ```
 
-Or:
-
-```sh
-$ npm install
-```
-
-# Environment settings
+### Environment settings
 
 Copy `.env.example` to `.env` and set the necessary values.
 
-## Scripts
+### Scripts
 
-Pull all projects from a given index:
+Pull all projects from a remote Amazon Elasticsearch index:
 
 ```sh
 $ yarn pull
 ```
 
-Create the index:
+Create an index in a local Elasticsearch instance:
 
 ```sh
 $ yarn createIndex
 ```
 
-Push the results from the `pull` operation to another (local) index:
+Push back up results from `pull` operation to the newly created local index:
 
 ```sh
 $ yarn push
 ```
 
-## Testing premium features
+### Testing premium features
 
 Keep in mind that there are certain features available only at a given [subscription level](https://www.elastic.co/subscriptions).
 

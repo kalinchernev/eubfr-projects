@@ -1,7 +1,7 @@
 version: "3.6"
 services:
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.3.2
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.5.4
     container_name: elasticsearch
     environment:
       - node.name=es
@@ -23,7 +23,7 @@ services:
       - 9200:9200
       - 9300:9300
   kibana:
-    image: docker.elastic.co/kibana/kibana:6.3.2
+    image: docker.elastic.co/kibana/kibana:6.5.4
     container_name: kibana
     environment:
       SERVER_NAME: localhost

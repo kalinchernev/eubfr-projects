@@ -30,7 +30,7 @@ const getAllProjects = async () => {
     const options = {
       host: ES_REMOTE_ENDPOINT,
       connectionClass,
-      apiVersion: "6.2",
+      apiVersion: "6.5",
       requestTimeout: 300000,
       awsConfig: new AWS.Config({
         accessKeyId,
