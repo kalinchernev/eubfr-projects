@@ -112,6 +112,12 @@ Create an index in a local Elasticsearch instance:
 $ yarn createIndex
 ```
 
+Delete an index
+
+```sh
+$ yarn deleteIndex
+```
+
 Push back up results from `pull` operation to the newly created local index:
 
 ```sh

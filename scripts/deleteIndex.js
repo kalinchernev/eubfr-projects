@@ -3,32 +3,23 @@
 // Get environment variables from .env configuration file.
 require("dotenv").config();
 
-const getProjectMapping = require("../mappings/project");
 const elasticsearch = require("elasticsearch");
 
 /**
  * Creates an Elasticsearch index.
  */
-const createIndex = async () => {
+const deleteIndex = async () => {
   const { ES_LOCAL_ENDPOINT, INDEX: index } = process.env;
-  const projectMapping = getProjectMapping();
 
   try {
     const client = elasticsearch.Client({ host: ES_LOCAL_ENDPOINT, index });
 
-    const exists = await client.indices.exists({ index });
+    await client.indices.delete({ index });
 
-    if (!exists) {
-      await client.indices.create({
-        index,
-        body: projectMapping
-      });
-
-      console.log(`Successfully created index: ${index}.`);
-    }
+    console.log(`Successfully deleted index: ${index}.`);
   } catch (e) {
     return console.error(e);
   }
 };
 
-createIndex();
+deleteIndex();

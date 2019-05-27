@@ -9,7 +9,7 @@ const split2 = require("split2");
 const through2Batch = require("through2-batch");
 const elasticsearch = require("elasticsearch");
 
-const SaveStream = require("./lib/SaveStream");
+const SaveStream = require("../lib/SaveStream");
 
 /**
  * Push records/projects to a given Elasticsearch index.
