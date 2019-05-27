@@ -3,9 +3,9 @@
   "name": "eubfr-projects",
   "version": "0.0.1",
   "scripts": {
-    "createIndex": "node createIndex.js",
-    "pull": "node pull.js",
-    "push": "node push.js"
+    "createIndex": "node /scripts/createIndex.js",
+    "pull": "node scripts/pull.js",
+    "push": "node scripts/push.js"
   },
   "dependencies": {
     "aws-sdk": "2.344.0",

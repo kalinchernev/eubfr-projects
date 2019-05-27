@@ -3,7 +3,7 @@
 // Get environment variables from .env configuration file.
 require("dotenv").config();
 
-const getProjectMapping = require("./mappings/project");
+const getProjectMapping = require("../mappings/project");
 const elasticsearch = require("elasticsearch");
 
 /**

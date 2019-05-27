@@ -36,7 +36,7 @@ kibana:
   image: docker.elastic.co/kibana/kibana:6.5.4
 ```
 
-Available Docker are listed [here](https://www.docker.elastic.co/#).
+Available Docker images are listed [here](https://www.docker.elastic.co/#).
 
 ## Provision resources
 
