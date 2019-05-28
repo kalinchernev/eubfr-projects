@@ -14,7 +14,7 @@ const getUserCredentials = promisify(awscred.load);
 /**
  * Get count of enriched records.
  */
-const getEnrichedRecords = async () => {
+const countEnrichedRecords = async () => {
   const { ES_REMOTE_ENDPOINT, INDEX, TYPE } = process.env;
 
   if (!ES_REMOTE_ENDPOINT) {
@@ -63,4 +63,4 @@ const getEnrichedRecords = async () => {
   }
 };
 
-getEnrichedRecords();
+countEnrichedRecords();

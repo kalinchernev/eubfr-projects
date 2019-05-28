@@ -47,7 +47,7 @@ The following folder contains sample queries: `./cases/267/queries/`.
 If you have [nodemon](https://nodemon.io/) you can iterate even faster like following:
 
 ```sh
-$ nodemon ./cases/267/queries/getEnrichedRecords.js
+$ nodemon ./cases/267/queries/countEnrichedRecords.js
 ```
 
 You will see results of the queries while you iterate on the given query.
