@@ -1,0 +1,103 @@
+{
+  "enrichmentResults": {
+    "project_locations": {
+      "before": [
+        {
+          "country_code": "BE",
+          "address": "",
+          "town": "",
+          "nuts": [],
+          "centroid": null,
+          "location": null,
+          "postal_code": "",
+          "region": ""
+        },
+        {
+          "country_code": "DE",
+          "address": "",
+          "town": "",
+          "nuts": [],
+          "centroid": null,
+          "location": null,
+          "postal_code": "",
+          "region": ""
+        }
+      ],
+      "after": [
+        {
+          "country_code": "BE",
+          "address": "",
+          "town": "",
+          "nuts": [],
+          "centroid": {
+            "lon": 4.6667145,
+            "lat": 50.6402809
+          },
+          "enriched": true,
+          "location": {
+            "coordinates": [4.6667145, 50.6402809],
+            "type": "Point"
+          },
+          "postal_code": "",
+          "region": ""
+        },
+        {
+          "country_code": "DE",
+          "address": "",
+          "town": "",
+          "nuts": [],
+          "centroid": {
+            "lon": 10.4234469,
+            "lat": 51.0834196
+          },
+          "enriched": true,
+          "location": {
+            "coordinates": [10.4234469, 51.0834196],
+            "type": "Point"
+          },
+          "postal_code": "",
+          "region": ""
+        }
+      ],
+      "date": "2019-05-28T11:45:11.637Z"
+    }
+  },
+  "project_locations": [
+    {
+      "country_code": "BE",
+      "address": "",
+      "town": "",
+      "nuts": [],
+      "centroid": {
+        "lon": 4.6667145,
+        "lat": 50.6402809
+      },
+      "enriched": true,
+      "location": {
+        "coordinates": [4.6667145, 50.6402809],
+        "type": "Point"
+      },
+      "postal_code": "",
+      "region": ""
+    },
+    {
+      "country_code": "DE",
+      "address": "",
+      "town": "",
+      "nuts": [],
+      "centroid": {
+        "lon": 10.4234469,
+        "lat": 51.0834196
+      },
+      "enriched": true,
+      "location": {
+        "coordinates": [10.4234469, 51.0834196],
+        "type": "Point"
+      },
+      "postal_code": "",
+      "region": ""
+    }
+  ],
+  "title": "Enriched: project_locations",
+  "type": ["Standard"]
+}

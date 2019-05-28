@@ -1,0 +1,115 @@
+{
+  "budget": {
+    "total_cost": {
+      "value": 3018500,
+      "currency": "EUR",
+      "raw": "EUR 3018500",
+      "_original": {
+        "value": 19800000,
+        "currency": "FRF",
+        "raw": "FF 19 800 000"
+      }
+    },
+    "eu_contrib": {
+      "value": 487900,
+      "currency": "EUR",
+      "raw": "EUR 487900",
+      "_original": {
+        "value": 3200000,
+        "currency": "FRF",
+        "raw": "FF 3 200 000"
+      }
+    },
+    "private_fund": {
+      "value": 0,
+      "currency": "",
+      "raw": ""
+    },
+    "public_fund": {
+      "value": 0,
+      "currency": "",
+      "raw": ""
+    },
+    "other_contrib": {
+      "value": 0,
+      "currency": "",
+      "raw": ""
+    },
+    "funding_area": [],
+    "mmf_heading": ""
+  },
+  "enrichmentResults": {
+    "budget": {
+      "before": {
+        "total_cost": {
+          "value": 3018500,
+          "currency": "EUR",
+          "raw": "EUR 3018500"
+        },
+        "eu_contrib": {
+          "value": 487900,
+          "currency": "EUR",
+          "raw": "EUR 487900"
+        },
+        "private_fund": {
+          "value": 0,
+          "currency": "",
+          "raw": ""
+        },
+        "public_fund": {
+          "value": 0,
+          "currency": "",
+          "raw": ""
+        },
+        "other_contrib": {
+          "value": 0,
+          "currency": "",
+          "raw": ""
+        },
+        "funding_area": [],
+        "mmf_heading": ""
+      },
+      "after": {
+        "total_cost": {
+          "value": 3018500,
+          "currency": "EUR",
+          "raw": "EUR 3018500",
+          "_original": {
+            "value": 19800000,
+            "currency": "FRF",
+            "raw": "FF 19 800 000"
+          }
+        },
+        "eu_contrib": {
+          "value": 487900,
+          "currency": "EUR",
+          "raw": "EUR 487900",
+          "_original": {
+            "value": 3200000,
+            "currency": "FRF",
+            "raw": "FF 3 200 000"
+          }
+        },
+        "private_fund": {
+          "value": 0,
+          "currency": "",
+          "raw": ""
+        },
+        "public_fund": {
+          "value": 0,
+          "currency": "",
+          "raw": ""
+        },
+        "other_contrib": {
+          "value": 0,
+          "currency": "",
+          "raw": ""
+        },
+        "funding_area": [],
+        "mmf_heading": ""
+      },
+      "date": "2019-05-28T12:07:55.248Z"
+    }
+  },
+  "title": "Enriched: budget"
+}

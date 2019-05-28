@@ -1,0 +1,82 @@
+{
+  "producer_id": "inforegio",
+  "action": "",
+  "budget": {
+    "total_cost": {
+      "value": 3140445,
+      "currency": "EUR",
+      "raw": "EUR 3 140 445"
+    },
+    "eu_contrib": {
+      "value": 1570223,
+      "currency": "EUR",
+      "raw": "EUR 1 570 223"
+    },
+    "private_fund": {
+      "value": 0,
+      "currency": "",
+      "raw": ""
+    },
+    "public_fund": {
+      "value": 0,
+      "currency": "",
+      "raw": ""
+    },
+    "other_contrib": {
+      "value": 0,
+      "currency": "",
+      "raw": ""
+    },
+    "funding_area": [],
+    "mmf_heading": ""
+  },
+  "call_year": "",
+  "description": "Sample description",
+  "ec_priorities": [],
+  "media": [],
+  "programme_name": "",
+  "project_id": "3604",
+  "project_locations": [
+    {
+      "country_code": "BE",
+      "address": "",
+      "town": "",
+      "nuts": [],
+      "centroid": null,
+      "location": null,
+      "postal_code": "",
+      "region": ""
+    },
+    {
+      "country_code": "DE",
+      "address": "",
+      "town": "",
+      "nuts": [],
+      "centroid": null,
+      "location": null,
+      "postal_code": "",
+      "region": ""
+    }
+  ],
+  "project_website": "",
+  "complete": false,
+  "related_links": [],
+  "reporting_organisation": "REGIO",
+  "results": {
+    "available": "",
+    "result": ""
+  },
+  "status": "",
+  "sub_programme_name": "",
+  "success_story": "",
+  "themes": [],
+  "third_parties": [],
+  "timeframe": {
+    "from": "2010-11-01T00:00:00.000Z",
+    "from_precision": "day",
+    "to": "2015-02-28T00:00:00.000Z",
+    "to_precision": "day"
+  },
+  "title": "Regular project: testing schema is up to date to actual one.",
+  "type": ["Standard"]
+}

@@ -1,0 +1,8 @@
+{
+  "enrichmentResults": {
+    "budget": {
+      "foo": "bar"
+    }
+  },
+  "title": "Field enrichmentResults has a property with a simple value"
+}

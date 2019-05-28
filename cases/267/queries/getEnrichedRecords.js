@@ -3,7 +3,6 @@
 // Get environment variables from .env configuration file.
 require("dotenv").config();
 
-const fs = require("fs");
 const { promisify } = require("util");
 const AWS = require("aws-sdk");
 const awscred = require("awscred");
@@ -13,18 +12,15 @@ const elasticsearch = require("elasticsearch");
 const getUserCredentials = promisify(awscred.load);
 
 /**
- * Get all records/projects out of a given Elasticsearch index.
+ * Get count of enriched records.
  */
-const getAllProjects = async () => {
+const getEnrichedRecords = async () => {
   const { ES_REMOTE_ENDPOINT, INDEX, TYPE } = process.env;
 
   if (!ES_REMOTE_ENDPOINT) {
     console.log("The environment variable ES_REMOTE_ENDPOINT is not set.");
-    console.log("Information will be pulled from localhost:9200, the default.");
-    console.log("Are you sure you wanted an export of a local database?");
+    console.log("You are currently working with localhost:9200, the default.");
   }
-
-  let pagination = 0;
 
   try {
     // Get user's AWS credentials and region
@@ -48,42 +44,23 @@ const getAllProjects = async () => {
 
     const client = elasticsearch.Client(options);
 
-    const start = await client.search({
+    // @see https://www.elastic.co/guide/en/elasticsearch/client/javascript-api/current/api-reference.html#_count
+    const results = await client.count({
       index: INDEX,
       type: TYPE,
-      scroll: "10m",
       body: {
-        size: 3000,
         query: {
-          match_all: {}
+          exists: {
+            field: "enrichmentResults"
+          }
         }
       }
     });
 
-    let { hits, _scroll_id } = start;
-
-    // We'll put results continuously in order to save memory.
-    const file = fs.createWriteStream("./results.ndjson");
-
-    while (hits && hits.hits.length) {
-      pagination += hits.hits.length;
-      console.log(`${pagination} of ${hits.total}`);
-
-      hits.hits.forEach(result => file.write(`${JSON.stringify(result)}\n`));
-
-      const next = await client.scroll({
-        scroll_id: _scroll_id,
-        scroll: "10m"
-      });
-
-      hits = next.hits;
-      _scroll_id = next._scroll_id;
-    }
-
-    return file.end();
+    console.log(results);
   } catch (e) {
     return console.error(e);
   }
 };
 
-getAllProjects();
+getEnrichedRecords();
