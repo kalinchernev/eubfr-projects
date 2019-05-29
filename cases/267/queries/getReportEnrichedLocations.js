@@ -3,7 +3,6 @@
 // Get environment variables from .env configuration file.
 require("dotenv").config();
 
-const fs = require("fs");
 const { promisify } = require("util");
 const AWS = require("aws-sdk");
 const awscred = require("awscred");
@@ -13,20 +12,25 @@ const elasticsearch = require("elasticsearch");
 const getUserCredentials = promisify(awscred.load);
 
 /**
- * Get all records/projects out of a given Elasticsearch index.
+ * Scroll through records and accumulate information about:
+ * - overall number of locations
+ * - number of enriched locations
  */
-const getAllProjects = async () => {
+const getReportEnrichedLocations = async () => {
   const { ES_REMOTE_ENDPOINT, INDEX, TYPE } = process.env;
 
   if (!ES_REMOTE_ENDPOINT) {
     console.log("The environment variable ES_REMOTE_ENDPOINT is not set.");
-    console.log("Information will be pulled from localhost:9200, the default.");
-    console.log("Are you sure you wanted an export of a local database?");
+    console.log("You are currently working with localhost:9200, the default.");
   }
 
-  let pagination = 0;
-
   try {
+    let pagination = 0;
+    let locationsCount = 0;
+    let locationsEnrichedCount = 0;
+    // Either take this from an example demo dashboard or deduct it via producer + file name of raw ingested file.
+    const computedKey = "euinvest/cfb25a6c-b1b6-4499-8839-bded773554b4.csv";
+
     // Get user's AWS credentials and region
     const credentials = await getUserCredentials();
 
@@ -48,28 +52,39 @@ const getAllProjects = async () => {
 
     const client = elasticsearch.Client(options);
 
+    // @see https://www.elastic.co/guide/en/elasticsearch/client/javascript-api/current/api-reference.html#_search
     const results = await client.search({
       index: INDEX,
       type: TYPE,
       scroll: "10m",
+      q: `computed_key:"${computedKey}.ndjson"`,
       body: {
-        size: 3000,
+        size: 1000,
         query: {
-          match_all: {}
+          exists: {
+            field: "project_locations"
+          }
         }
       }
     });
 
     let { hits, _scroll_id } = results;
 
-    // We'll put results continuously in order to save memory.
-    const file = fs.createWriteStream("./results.ndjson");
-
     while (hits && hits.hits.length) {
       pagination += hits.hits.length;
       console.log(`${pagination} of ${hits.total}`);
 
-      hits.hits.forEach(result => file.write(`${JSON.stringify(result)}\n`));
+      hits.hits.forEach(record => {
+        const locations = record._source.project_locations;
+
+        const locationsInRecord = locations.length;
+        locationsCount += locationsInRecord;
+
+        const enrichedLocationsInRecord = locations.filter(
+          location => location.enriched
+        ).length;
+        locationsEnrichedCount += enrichedLocationsInRecord;
+      });
 
       const next = await client.scroll({
         scroll_id: _scroll_id,
@@ -80,10 +95,11 @@ const getAllProjects = async () => {
       _scroll_id = next._scroll_id;
     }
 
-    return file.end();
+    console.log(`# locations: ${locationsCount}`);
+    console.log(`# enriched: ${locationsEnrichedCount}`);
   } catch (e) {
     return console.error(e);
   }
 };
 
-getAllProjects();
+getReportEnrichedLocations();

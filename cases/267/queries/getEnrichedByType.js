@@ -29,7 +29,7 @@ const getEnrichedByType = async () => {
     const { region } = credentials;
     const { accessKeyId, secretAccessKey } = credentials.credentials;
 
-    // Elasticsearch client configuration
+    // Elasticsearch client configuration.
     const options = {
       host: ES_REMOTE_ENDPOINT,
       connectionClass,
